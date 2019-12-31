@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Index thymeleaf</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <!--<script>
+        $(function () {
+           $("#onLinePay").bind('click',function () {
+               var orderId = $("#orderId").val();
+               var money = $("#money").val();
+               var bank  = $("input[name='yh']").val();
+               var url = "/toPayPage";
+               $.ajax({
+                   url : url,
+                   type : 'post',
+                   dataType : 'json',
+                   data : {
+                       'orderId' : orderId,
+                       'money' : money,
+                       'bank':bank
+                   },
+                   success:function(result){
+                       var code = result.rCode;
+                       var message = result.message;
+                       if("200" == code){
+                           var url = "/index";
+                           window.location.href=url;
+                       }else if("1000" == code){
+                           layer.msg(message);
+                       }else if("1001" == code){
+                           layer.msg(message);
+                           changeImg();
+                       }else if("1002" == code){
+                           layer.msg(message);
+                           changeImg();
+                       }else if("1003" == code){
+                           layer.msg(message);
+                       }
+                   }
+               });
+           })
+        })
+   </script>-->
+
+</head>
+
+
+<body>
+
+<form id="toPayPage" action="/toPayPage" method="post">
+    订单号：<INPUT TYPE="text" NAME="orderId" value="" id="orderId">
+    支付金额：<INPUT	TYPE="text" NAME="money" value="" id="money">元
+<div class="divBank">
+    <div class="divText">选择网上银行</div>
+    <div style="margin-left: 20px;">
+        <div style="margin-bottom: 20px;">
+            <input id="ICBC-NET-B2C" type="radio" name="yh"	value="ICBC-NET-B2C" checked="checked" /> 工商银行
+            <input	id="CMBCHINA-NET-B2C" type="radio" name="yh"	value="CMBCHINA-NET-B2C" /> 招商银行
+            <input id="ABC-NET-B2C" type="radio" name="yh" value="ABC-NET-B2C" /> 农业银行
+            <input id="CCB-NET-B2C" type="radio" name="yh" value="CCB-NET-B2C" /> 建设银行
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input id="BCCB-NET-B2C" type="radio" name="yh"  value="BCCB-NET-B2C" /> 北京银行
+            <input  id="BOCO-NET-B2C" type="radio" name="yh" value="BOCO-NET-B2C" /> 交通银行
+            <input id="CIB-NET-B2C" type="radio" name="yh" value="CIB-NET-B2C" />    兴业银行
+            <input id="NJCB-NET-B2C" type="radio" name="yh" value="NJCB-NET-B2C" />  南京银行
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input id="CMBC-NET-B2C" type="radio" name="yh" value="CMBC-NET-B2C" />  民生银行
+            <input id="CEB-NET-B2C" type="radio" name="yh" value="CEB-NET-B2C" />    光大银行
+            <input id="BOC-NET-B2C" type="radio" name="yh" value="BOC-NET-B2C" />    中国银行
+            <input id="PINGANBANK-NET" type="radio" name="yh" value="PINGANBANK-NET" /> 平安银行
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input id="CBHB-NET-B2C" type="radio" name="yh" value="CBHB-NET-B2C" />  渤海银行
+            <input  id="HKBEA-NET-B2C" type="radio" name="yh" value="HKBEA-NET-B2C" /> 东亚银行
+            <input id="NBCB-NET-B2C" type="radio" name="yh" value="NBCB-NET-B2C" />  宁波银行
+            <input   id="ECITIC-NET-B2C" type="radio" name="yh" value="ECITIC-NET-B2C" /> 中信银行
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input id="SDB-NET-B2C" type="radio" name="yh" value="SDB-NET-B2C" /> 深发银行
+            <input id="GDB-NET-B2C" type="radio" name="yh" value="GDB-NET-B2C" /> 广发银行
+            <input id="SHB-NET-B2C" type="radio" name="yh" value="SHB-NET-B2C" /> 上海银行
+            <input  id="SPDB-NET-B2C" type="radio" name="yh" value="SPDB-NET-B2C" /> 浦发银行
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input id="POST-NET-B2C" type="radio" name="yh" value="POST-NET-B2C" /> 中国邮政
+            <input id="BJRCB-NET-B2C" type="radio" name="yh" value="BJRCB-NET-B2C" /> 农商银行
+            <input id="HXB-NET-B2C" type="radio" name="yh" value="HXB-NET-B2C" /> 华夏银行
+            <input id="CZ-NET-B2C" type="radio" name="yh" value="CZ-NET-B2C" />  浙商银行
+        </div>
+    </div>
+    <div style="margin: 40px;">
+        <INPUT TYPE="submit" value="确定支付" id="onLinePay">
+    </div>
+</div>
+
+
+</form>
+
+
+</body>
+</html>

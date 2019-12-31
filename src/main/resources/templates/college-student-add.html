@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加大学生</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/h-ui.admin/css/style.css" />
+
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script src="layer/layer.js"></script>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="college-sutdent-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="gender" type="radio" id="01" checked value="01">
+                    <label for="01">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="02" name="gender" value="02">
+                    <label for="02">女</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="03" name="gender" value="03">
+                    <label for="03">保密</label>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="phone" name="phone"
+                       pattern="(\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$" required="required" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="address" id="address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>提议：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="proposal" id="proposal">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>业余活动：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="leisureActivities" id="leisureActivities-1">宅家</label>
+                <label class=""><input type="checkbox" value="02" name="leisureActivities" id="leisureActivities-2">健身</label>
+                <label class=""><input type="checkbox" value="03" name="leisureActivities" id="leisureActivities-3">读书</label>
+                <label class=""><input type="checkbox" value="04" name="leisureActivities" id="leisureActivities-4">看电影</label>
+                <label class=""><input type="checkbox" value="05" name="leisureActivities" id="leisureActivities-5">陪异性朋友</label>
+                <label class=""><input type="checkbox" value="06" name="leisureActivities" id="leisureActivities-6">兼职</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>兼职途径：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="workResource" id="workResource-0">无途径</label>
+                <label class=""><input type="checkbox" value="02" name="workResource" id="workResource-1">朋友介绍</label>
+                <label class=""><input type="checkbox" value="03" name="workResource" id="workResource-2">51job/boss 直聘网站</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>愿意承受的兼职类型：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="labourType" id="labourType-0">体力劳动</label>
+                <label class=""><input type="checkbox" value="02" name="labourType" id="labourType-1">智力劳动</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职业规划：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="careerDirection" id="careerDirection-0">家教</label>
+                <label class=""><input type="checkbox" value="02" name="careerDirection" id="careerDirection-1">导游</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>费用结算方式：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="payType" id="payType-0">收取费用</label>
+                <label class=""><input type="checkbox" value="02" name="payType" id="payType-1">固定薪酬</label>
+                <label class=""><input type="checkbox" value="03" name="payType" id="payType-2">无所谓</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>费用结算周期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="payFrequency" id="payFrequency-0">周清</label>
+                <label class=""><input type="checkbox" value="02" name="payFrequency" id="payFrequency-1">月清</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>服务人群：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="servicePopulation" id="servicePopulation-0">小学生</label>
+                <label class=""><input type="checkbox" value="02" name="servicePopulation" id="servicePopulation-1">中学生</label>
+                <label class=""><input type="checkbox" value="03" name="servicePopulation" id="servicePopulation-2">高中生</label>
+                <label class=""><input type="checkbox" value="04" name="servicePopulation" id="servicePopulation-3">外国人</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>服务客户类型：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <label class=""><input type="checkbox" value="01" name="serviceCusGender" id="serviceCusGender-1">男客户</label>
+                <label class=""><input type="checkbox" value="02" name="serviceCusGender" id="serviceCusGender-2">女客户</label>
+                <label class=""><input type="checkbox" value="03" name="serviceCusGender" id="serviceCusGender-3">无所谓</label>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" id="save" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+</body>
+</html>
+
+<script>
+    $(function(){
+
+        $("#save").bind('click',function(){
+           var url = "/collegeStudentSave";
+            $.ajax({
+                method : 'post',
+                url : url,
+                dateType:'json',
+                data : $('#college-sutdent-add').serialize(),
+                success : function(result) {
+                    var code = result.code;
+                    var message = result.message;
+                    if("200" == code){
+                        layer.closeAll(); //关闭信息框
+                        window.parent.location.reload();
+                    }else if("555" == code){
+                        layer.msg(message);
+                    }
+                }
+            })
+        });
+    });
+</script>

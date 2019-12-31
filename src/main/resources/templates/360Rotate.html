@@ -1,0 +1,135 @@
+
+<!doctype html>
+	<head>
+		<meta charset="utf-8">
+		<!--网页文档的三要素-->
+		<title>图片自定义</title>
+		<meta name="keywords" content="关键词：提供给搜索引擎搜索网站">
+		<meta name="description" content="描述:对网页内容的大概的介绍">
+	    <link href="/css/360JDRotate.css" rel="stylesheet" type="text/css"/>
+	    <script src="/js/jquery-1.8.3.js"></script>
+		
+		<style type="text/css">
+          <!-- *{margin:0;padding:0;}
+			#wrap{perspective:800px;}
+			body{
+			   background:#000;
+			   }
+			.box{
+			   width:120px;
+			   height:180px;
+			   border:2px dotted  #ccc;
+			   margin:250px auto 0;
+			   position:relative;
+			   transform-style:preserve-3d;
+			   transform:rotateY(0deg);
+			}
+			.box img{
+				width:100%;
+				height:100%;
+				position:absolute;
+				top:0;
+				left:0;
+				
+				box-shadow:0 0 10px #f9f;
+			}
+			.box p{
+				width:1200px;
+				height:1200px;
+				border-radius:50%;
+				margin-left:-600px;
+				transform:rotateX(90deg) translateZ(400px);
+				background:-webkit-radius-gradient(center center,600px 600px,rgba(255,255,255,.3)0%,rgba(255,255,255,0)100%);
+				border-radius:50%;
+	}-->
+		</style>
+	</head>
+	<body>
+
+		 <div id="wrap">
+		   <div class="box"><img src="../static/img/3.jpg" height="200" width="133"/>
+			   <img src="/img/1.jpg">
+			 <img src="./img/2.jpg">
+			 <img src="./img/3.jpg">
+			 <img src="./img/4.jpg">
+			 <img src="./img/5.jpg">
+			 <img src="./img/6.jpg">
+			 <img src="./img/7.jpg">
+			 <img src="./img/8.jpg">
+			 <img src="./img/9.jpg">
+			 <img src="./img/10.jpg">
+			 <img src="./img/11.jpg">
+			 <p></p>
+		   </div>
+		</div>
+		
+		<script type="text/javascript">
+
+		window.onload = function (){
+			 var oImg = document.getElementsByTagName('img');
+             var oBox = document.getElementsByClassName('box')[0]; 
+		    //图片长度 
+			   var len = oImg.length;
+			   var oDeg = 360/len;
+			   var mX,mY,dX,dY,minuX =0,minuY =0,roX=0,roY=0,timer;
+			   for(var i=0;i<len;i++){
+				 oImg[i].style.transform ='rotateY('+i*oDeg+'deg)translateZ(350px)';
+				 oImg[i].style.transition = '1s '+(len -1-i)*100+'ms';
+				//oImg[i].style.transform ='rotateY('+i*oDeg+'deg)';
+			   }
+
+			     //当窗口改变大小的时候，重新计算高度
+			   window.onresize = play;
+			    play();
+			   function play(){
+				var wH = document.documentElement.clientHeight;
+				oBox.style.marginTop = (wH/2-90)+'px';
+				
+			   }
+
+
+			   //鼠标按下事件
+	          document.onmousedown = function (e){
+
+                        e = e || window.event;
+						clearInterval(timer);
+						dX =e.clientX;
+		                dY =e.clientY;
+				   //鼠标移动事件
+				  this.onmousemove = function(e){
+						e = e || window.event;
+						mX =e.clientX;
+						mY =e.clientY;
+						minuX = mX - dX;
+			            minuY = mY - dY;
+						roX += minuX *0.2 ;
+			            roY -= minuY *0.2;
+
+						oBox.style.transform = 'rotateX('+roY+'deg)rotateY('+roX+'deg)';
+						//oBox.style.transform = 'rotateY('+minuX+'deg)';
+						dX = mX;
+						dY = mY;
+						
+						 
+				  };
+				  //鼠标抬起事件
+				   this.onmouseup = function (){
+				        this.onmousemove = null;
+						timer = setInterval(function(){
+						   minuX *= 0.95;
+			               minuY *=0.95;
+						   roX += minuX *0.2 ;
+			               roY -= minuY *0.2;
+						   oBox.style.transform = 'rotateX('+roY+'deg)rotateY('+roX+'deg)';
+						   if(Math.abs(minuX) < 0.1  && Math.abs(minuY) < 0.1){
+			                clearInterval(timer);
+			                }
+						},16);
+				  };
+				  return false;
+	         };
+
+		}
+		</script>
+	</body>
+</html>

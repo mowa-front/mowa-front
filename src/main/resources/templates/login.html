@@ -1,0 +1,159 @@
+﻿<html>
+<head>
+  <meta charset="utf-8">
+  <title>欢迎来到登录页</title>
+
+</head>
+
+<link href="/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css"/>
+<link href="/h-ui.admin/css/style.css" rel="stylesheet" type="text/css"/>
+
+<script src="/js/jquery-1.8.3.js"></script>
+<script src="layer/layer.js"></script>
+
+<script>
+
+
+  //获取验证码
+   function changeImg() {
+    var img = document.getElementById("imgCode");
+    img.src = "[[${findJobUrl}]]getImage?date=" + new Date();
+  };
+
+    $(function () {
+        //弹出一个提示层
+        $('#test').on('click', function(){
+            layer.msg('hello');
+        });
+        //弹出一个页面层
+        $('#test2').on('click', function(){
+            layer.open({
+                type: 1,
+                area: ['600px', '360px'],
+                shadeClose: true, //点击遮罩关闭
+                content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+            });
+        });
+        //弹出一个iframe层
+        $('#parentIframe').on('click', function(){
+            layer.open({
+                type: 2,
+                title: 'iframe父子操作',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['800px' , '520px'],
+                content: 'test/iframe.html'
+            });
+        });
+        //弹出一个loading层
+        $('#test4').on('click', function(){
+            var ii = layer.load();
+            //此处用setTimeout演示ajax的回调
+            setTimeout(function(){
+                layer.close(ii);
+            }, 1000);
+        });
+        //弹出一个tips层
+        $('#test5').on('click', function(){
+            layer.tips('Hello tips!', '#test5');
+        });
+        $("#keyLogin").keydown(function () {
+            if(event.keyCode == 13){
+                $($("input[name='login']")).click();
+            }
+        });
+
+        //登陆
+        $($("input[name='login']")).click(function() {
+            var nickName = $("#nickName").val();
+            var password = $("#password").val();
+            var code= $("#code").val();
+            var url = "[[${findJobUrl}]]/valid-login";
+            $.ajax({
+                url : url,
+                type : 'get',
+                dataType : 'json',
+                data : {
+                    'nickName' : nickName,
+                    'password' : password,
+                    'code':code
+                },
+                success:function(result){
+                    //debugger
+                    var code = result.rCode;
+                    var message = result.message;
+                    if("200" == code){
+                        var url = "/index";
+                        window.location.href=url;
+                    }else if("1000" == code){
+                        layer.msg(message);
+                    }else if("1001" == code){
+                        layer.msg(message);
+                       changeImg();
+                    }else if("1002" == code){
+                        layer.msg(message);
+                      changeImg();
+                    }else if("1003" == code){
+                        layer.msg(message);
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<body id="keyLogin">
+<input type="hidden" id="TenantId" name="TenantId" value="" />
+<input type="hidden" th:value="${findJobUrl}" id="findJobUrl"/>
+<div class=""></div>
+<div class="loginWraper">
+  <div id="loginform" class="loginBox">
+    <form class="form form-horizontal">
+      <div class="row cl">
+        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+        <div class="formControls col-xs-8">
+          <input id="nickName" name="nickName" type="text" placeholder="账户" class="input-text size-L">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-xs-8">
+          <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <input class="input-text size-L" type="text" placeholder="验证码"
+                 id="code"
+                 onblur="if(this.value==''){this.value='验证码:'}"
+                 onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
+          <img src="http://localhost:8081/getImage"  name="code" id="imgCode"> <a id="changeImg" href="javascript:;" onclick="changeImg()">看不清，换一张</a></div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <label for="online">
+            <input type="checkbox" name="online" id="online" value="">
+            使我保持登录状态</label>
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <input name="login" type="button" id="login" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input name="" type="reset" class="btn btn-default radius size-L"  value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+
+          <!--<input type= "button" id="test" value="test">
+          <input type= "button" id="test2" value="test2">
+          <input type= "button" id="test3" value="test3">
+          <input type= "button" id="test4" value="test4">
+          <input type= "button" id="test5" value="test5">-->
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
+
+</body>
+</html>

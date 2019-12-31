@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>宝宝发邮件</title>
+
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/layer/layer.js"></script>
+</head>
+
+<body id="keyDown">
+<div class="divFather">
+    <form id="add-user">
+        <fieldset>
+            <legend>添加用户信息：</legend>
+            <label>用户名：</label>
+            <input type="text" name="userName" id="userName" placeholder="请输入用户姓名" aria-label="姓名"/>
+            <label>密码：</label>
+            <input type="password" name="password" id="password" placeholder="请输入用户密码" aria-label="密码" />
+            <label>性别：</label>
+            <input type="radio" name="sex"  value="男" checked />男
+            <input type="radio" name="sex"  value="女" />女
+            <label>生日：</label>
+            <input type="date"  name="birthday">
+            <label>地址：</label>
+            <input type="text"  name="address">
+            <label>状态：</label>
+            <select name="deleteFlag">
+                <option value="true" aria-checked="true">启用</option>
+                <option value="false">禁用</option>
+            </select>
+            <label>邮箱：</label>
+            <input type="text"  name="email" />
+            <input type="button" name="save" id="save" value="保存"/>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+
+<script>
+    $(function(){
+
+        $("#keyDown").keydown(function () {
+            if(event.keyCode == 13){
+                $($("input[name='save']")).click();
+            }
+        });
+
+        $("#save").bind('click',function(){
+            var url = "/mvc/register-with-email";
+            $.ajax({
+                method : 'post',
+                url : url,
+                dateType:'json',
+                data : $('#add-user').serialize(),
+                success : function(result) {
+                    var code = result.code;
+                    var message = result.message;
+                    if("200" == code){
+                        layer.closeAll(); //关闭信息框
+                        window.parent.location.reload();
+                    }else if("555" == code){
+                        layer.msg(message);
+                    }
+                }
+            })
+        });
+
+    });
+</script>
