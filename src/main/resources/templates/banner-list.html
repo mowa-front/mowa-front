@@ -46,7 +46,7 @@
 		<button type="submit" class="btn btn-success radius" id="searchBtn"><i class="Hui-iconfont">&#xe665;</i> 查詢
 		</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="banner_add('添加轮播图','/banner-add','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加轮播图</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="banner_add('新增','/banner-saveOrUpdate','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加轮播图</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -127,7 +127,7 @@ $(function(){
                      str += "<td>" + list[i].createDate + "</td>";
                      str += " <td class=\"td-manage\">";
                      str += " <a style=\"text-decoration:none\" onClick=\"banner_stop(this," + list[i].id + ")\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">&#xe631;</i></a>";
-                     str += " <a title=\"编辑\" href=\"javascript:;\" onclick=\"member_edit('编辑','member-add.html','4','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>";
+                     str += " <a title=\"编辑\" href=\"javascript:;\" onclick=\"banner_edit('编辑','/banner-saveOrUpdate?id=" + list[i].id + "'," + list[i].id + ",'','510')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>";
                      str += " <a style=\"text-decoration:none\" class=\"ml-5\" onClick=\"change_password('修改密码','change-password.html','10001','600','270')\" href=\"javascript:;\" title=\"修改密码\"><i class=\"Hui-iconfont\">&#xe63f;</i></a>";
                      str += " <a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'1')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e2;</i></a>";
                      str += "  </td>";
@@ -145,6 +145,7 @@ $(function(){
 
 
 /*用户-添加*/
+//:弹框title ,跳转url,宽，高
 function banner_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
@@ -197,7 +198,8 @@ function member_start(obj,id){
 	});
 }
 /*用户-编辑*/
-function member_edit(title,url,id,w,h){
+//参数：弹出框title,跳转url,传参，宽，高
+function banner_edit(title,url,id,w,h){
 	layer_show(title,url,w,h);
 }
 /*密码-修改*/

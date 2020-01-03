@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author: 凤凰[小哥哥]
@@ -36,11 +39,14 @@ public class MenuController {
     }
 
     //跳转轮播图列表页
-    @GetMapping("/banner-add")
-    public String bannerAdd(Model model){
+    @GetMapping("/banner-saveOrUpdate")
+    public String bannerSaveOrUpdate(Model model, HttpServletRequest request){
+        String id = request.getParameter("id");
         model.addAttribute("findJobUrl",findJobUrl);
-        return "banner-add";
+        model.addAttribute("id",id);
+        return "banner-edit";
     }
+
 
     //跳转轮播图列表页
     @GetMapping("/go-login")
