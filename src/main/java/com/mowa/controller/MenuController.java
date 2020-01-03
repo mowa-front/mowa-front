@@ -34,4 +34,18 @@ public class MenuController {
         model.addAttribute("findJobUrl",findJobUrl);
         return "banner-list";
     }
+
+    //跳转轮播图列表页
+    @GetMapping("/banner-add")
+    public String bannerAdd(Model model){
+        model.addAttribute("findJobUrl",findJobUrl);
+        return "banner-add";
+    }
+
+    //跳转轮播图列表页
+    @GetMapping("/go-login")
+    public String goLogin(Model model){
+        model.addAttribute("findJobUrl",findJobUrl);
+        return "login";
+    }
 }
