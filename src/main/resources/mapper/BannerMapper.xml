@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mowa.dao.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.mowa.entity.Banner">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="activity_id" jdbcType="INTEGER" property="activityId" />
+    <result column="activity_img" jdbcType="VARCHAR" property="activityImg" />
+    <result column="rank_field" jdbcType="INTEGER" property="rankField" />
+    <result column="banner_img_status" jdbcType="INTEGER" property="bannerImgStatus" />
+    <result column="founder" jdbcType="VARCHAR" property="founder" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, activity_id, activity_img, rank_field, banner_img_status, founder, modifier, 
+    create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from banner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mowa.entity.Banner">
+    insert into banner (id, activity_id, activity_img, 
+      rank_field, banner_img_status, founder, 
+      modifier, create_date, update_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{activityImg,jdbcType=VARCHAR}, 
+      #{rankField,jdbcType=INTEGER}, #{bannerImgStatus,jdbcType=INTEGER}, #{founder,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mowa.entity.Banner">
+    insert into banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="activityImg != null">
+        activity_img,
+      </if>
+      <if test="rankField != null">
+        rank_field,
+      </if>
+      <if test="bannerImgStatus != null">
+        banner_img_status,
+      </if>
+      <if test="founder != null">
+        founder,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityImg != null">
+        #{activityImg,jdbcType=VARCHAR},
+      </if>
+      <if test="rankField != null">
+        #{rankField,jdbcType=INTEGER},
+      </if>
+      <if test="bannerImgStatus != null">
+        #{bannerImgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="founder != null">
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mowa.entity.Banner">
+    update banner
+    <set>
+      <if test="activityId != null">
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityImg != null">
+        activity_img = #{activityImg,jdbcType=VARCHAR},
+      </if>
+      <if test="rankField != null">
+        rank_field = #{rankField,jdbcType=INTEGER},
+      </if>
+      <if test="bannerImgStatus != null">
+        banner_img_status = #{bannerImgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="founder != null">
+        founder = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mowa.entity.Banner">
+    update banner
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      activity_img = #{activityImg,jdbcType=VARCHAR},
+      rank_field = #{rankField,jdbcType=INTEGER},
+      banner_img_status = #{bannerImgStatus,jdbcType=INTEGER},
+      founder = #{founder,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findBanner" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from banner
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="activityId != null">
+        and activity_id = #{activityId}
+      </if>
+      <if test="bannerImgStatus != null and bannerImgStatus != 0 ">
+        and banner_img_status = #{bannerImgStatus}
+      </if>
+      <if test="founder != null and founder !='' ">
+        and founder = #{founder}
+      </if>
+      <if test="createDateBegin!=null and createDateBegin!='' ">
+        and create_date &gt;= #{createDateBegin}
+      </if>
+      <if test="createDateEnd!=null and createDateEnd!='' ">
+        and create_date &lt;= #{createDateEnd}
+      </if>
+    </where>
+  </select>
+  <select id="findBannerByActivityId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from banner where activity_id = #{activityId} and banner_img_status = 1;
+  </select>
+
+
+  <delete id="deleteGroupKV">
+    delete from banner where banner_img_status = #{state} and activity_id in
+    <foreach item="activityIds" index="index" collection="activityIds" open="(" separator="," close=")">
+      #{activityIds}
+    </foreach>
+  </delete>
+</mapper>

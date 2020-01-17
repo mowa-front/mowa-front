@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mowa.dao.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.mowa.entity.Activity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="activity_title" jdbcType="VARCHAR" property="activityTitle" />
+    <result column="activity_content" jdbcType="VARCHAR" property="activityContent" />
+    <result column="activity_create_date" jdbcType="TIMESTAMP" property="activityCreateDate" />
+    <result column="activity_end_date" jdbcType="TIMESTAMP" property="activityEndDate" />
+    <result column="activity_status" jdbcType="INTEGER" property="activityStatus" />
+    <result column="examine_status" jdbcType="INTEGER" property="examineStatus" />
+    <result column="founder" jdbcType="VARCHAR" property="founder" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, activity_title, activity_content, activity_create_date, activity_end_date, activity_status, 
+    examine_status, founder, modifier, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mowa.entity.Activity">
+    insert into activity (id, activity_title, activity_content, 
+      activity_create_date, activity_end_date, 
+      activity_status, examine_status, founder, 
+      modifier, create_date, update_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{activityTitle,jdbcType=VARCHAR}, #{activityContent,jdbcType=VARCHAR}, 
+      #{activityCreateDate,jdbcType=TIMESTAMP}, #{activityEndDate,jdbcType=TIMESTAMP}, 
+      #{activityStatus,jdbcType=INTEGER}, #{examineStatus,jdbcType=INTEGER}, #{founder,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mowa.entity.Activity">
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="activityTitle != null">
+        activity_title,
+      </if>
+      <if test="activityContent != null">
+        activity_content,
+      </if>
+      <if test="activityCreateDate != null">
+        activity_create_date,
+      </if>
+      <if test="activityEndDate != null">
+        activity_end_date,
+      </if>
+      <if test="activityStatus != null">
+        activity_status,
+      </if>
+      <if test="examineStatus != null">
+        examine_status,
+      </if>
+      <if test="founder != null">
+        founder,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityTitle != null">
+        #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="activityContent != null">
+        #{activityContent,jdbcType=VARCHAR},
+      </if>
+      <if test="activityCreateDate != null">
+        #{activityCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityEndDate != null">
+        #{activityEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityStatus != null">
+        #{activityStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examineStatus != null">
+        #{examineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="founder != null">
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mowa.entity.Activity">
+    update activity
+    <set>
+      <if test="activityTitle != null">
+        activity_title = #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="activityContent != null">
+        activity_content = #{activityContent,jdbcType=VARCHAR},
+      </if>
+      <if test="activityCreateDate != null">
+        activity_create_date = #{activityCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityEndDate != null">
+        activity_end_date = #{activityEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityStatus != null">
+        activity_status = #{activityStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examineStatus != null">
+        examine_status = #{examineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="founder != null">
+        founder = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mowa.entity.Activity">
+    update activity
+    set activity_title = #{activityTitle,jdbcType=VARCHAR},
+      activity_content = #{activityContent,jdbcType=VARCHAR},
+      activity_create_date = #{activityCreateDate,jdbcType=TIMESTAMP},
+      activity_end_date = #{activityEndDate,jdbcType=TIMESTAMP},
+      activity_status = #{activityStatus,jdbcType=INTEGER},
+      examine_status = #{examineStatus,jdbcType=INTEGER},
+      founder = #{founder,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryActivity" resultMap="BaseResultMap" parameterType="com.mowa.request.ReqActivityQuery">
+    select
+    <include refid="Base_Column_List" />
+    from activity
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="activityTitle != null">
+        and activity_title = #{activityTitle}
+      </if>
+      <if test="activityStatus != null">
+        and activity_status = #{activityStatus}
+      </if>
+      <if test="examineStatus != null">
+        and examine_status = #{examineStatus}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryActivityByTitle" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from activity where activity_title = #{title} and activity_status in(1,2);
+  </select>
+
+  <select id="findActivityPage" resultMap="BaseResultMap" parameterType="com.mowa.request.ReqActivityQuery">
+    select
+    <include refid="Base_Column_List" />
+    from activity
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="activityTitle != null">
+        and activity_title = #{activityTitle}
+      </if>
+      <if test="activityStatus != null">
+        and activity_status = #{activityStatus}
+      </if>
+      <if test="examineStatus != null">
+        and examine_status = #{examineStatus}
+      </if>
+    </where>
+  </select>
+</mapper>

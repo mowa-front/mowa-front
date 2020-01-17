@@ -1,11 +1,21 @@
-
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&allowMultiQueries=true
+    username: root
+    password: root
+
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML5
     encoding: UTF-8
     cache: false
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.mowa.entity
+
 
 find-job:
   url: http://127.0.0.1:8081/
